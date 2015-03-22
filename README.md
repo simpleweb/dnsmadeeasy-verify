@@ -7,6 +7,10 @@ Gem to verify that domains on DNS Made Easy actually have their name servers set
 
 domains = Dnsmadeeasy_verify.domains_not_on_dnsmadeeasy
 domains.each do |k,v|
-  puts k
+  if not v.registered then
+    puts k + " is not registered"
+  else
+    puts k + " does not have name servers correctly set"
+  end
 end
 ```
