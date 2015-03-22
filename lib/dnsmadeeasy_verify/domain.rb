@@ -30,7 +30,6 @@ module Dnsmadeeasy_verify
     def get_name_servers
       ns = []
       res = Dnsruby::Resolver.new
-      res.retry_times=(2)
       ns_req = nil
       begin
         ns_req = res.query(@name, "NS")
@@ -41,7 +40,6 @@ module Dnsmadeeasy_verify
         return []
       end
 
-      ns_req = res.query(@name, "NS")
       (ns_req.answer.select {|r| r.type == "NS"}).each do |nsrr|
         ns << nsrr.domainname.to_s
       end
