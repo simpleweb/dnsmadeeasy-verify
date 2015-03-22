@@ -2,8 +2,8 @@ require 'faraday'
 require 'whois'
 require 'json'
 require 'dnsruby'
-require 'dnsmadeeasy_verify/Domain'
-require 'dnsmadeeasy_verify/Dnsmadeeasy_api'
+require 'dnsmadeeasy_verify/domain'
+require 'dnsmadeeasy_verify/dnsmadeeasy_api'
 
 module Dnsmadeeasy_verify
 
