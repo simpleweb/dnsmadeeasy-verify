@@ -7,6 +7,7 @@ require 'dnsmadeeasy_verify/Dnsmadeeasy_api'
 
 module Dnsmadeeasy_verify
 
+  # Returns all domains from DNS Made Easy
   def self.list_domains
     domains = Hash.new
     response = get_all_domains(Dnsmadeeasy_verify.configuration.dnsmadeeasy_api_key, Dnsmadeeasy_verify.configuration.dnsmadeeasy_api_secret)
@@ -23,20 +24,14 @@ module Dnsmadeeasy_verify
     domains
   end
 
+  # Returns all domains that are not correctly setup on DNS Made Easy
   def self.domains_not_on_dnsmadeeasy()
     domains = self.list_domains
-
+    domains_not_on_dnsmadeeasy = Hash.new
     domains.each do |k, v|
-      # If none of the name server are set to dnsmadeeasy
-      if not v.ns.any?{ |s| s.downcase().include?("dnsmadeeasy.com") }
-        if v.registered
-          puts k + " does not have name servers set to dnsmadeeasy"
-        else
-          puts k + " is not registered"
-        end
-      end
+      domains_not_on_dnsmadeeasy[k] = v unless v.do_name_servers_contain("dnsmadeeasy.com")
     end
-
+    domains_not_on_dnsmadeeasy
   end
 
   class << self

@@ -21,7 +21,12 @@ module Dnsmadeeasy_verify
       @whois.registered?
     end
 
-    def ns
+    def do_name_servers_contain(domain)
+      name_servers = get_name_servers
+      return name_servers.any?{ |s| s.downcase().include?(domain) }
+    end
+
+    def get_name_servers
       ns = []
       res = Dnsruby::Resolver.new
       res.retry_times=(2)
