@@ -16,16 +16,15 @@ module Dnsmadeeasy_verify
         data = JSON.parse(response.body)
 
         data['data'].each do |child|
-            domains[child["name"]] = Domain.new(child["name"])
+            domains[child["name"]] = Domain.new(child["id"],child["name"])
         end
-
     end
 
     domains
   end
 
   # Returns all domains that are not correctly setup on DNS Made Easy
-  def self.domains_not_on_dnsmadeeasy()
+  def self.domains_not_on_dnsmadeeasy
     domains = self.list_domains
     domains_not_on_dnsmadeeasy = Hash.new
     domains.each do |k, v|

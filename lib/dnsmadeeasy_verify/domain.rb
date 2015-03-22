@@ -5,9 +5,10 @@ module Dnsmadeeasy_verify
   class Domain
     include Dnsruby
 
-    attr_accessor :name
+    attr_accessor :id, :name
 
-    def initialize(name)
+    def initialize(id, name)
+      @id = id
       @name = name
     end
 
