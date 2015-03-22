@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.files       = Dir["{lib}/**/*", "Gemfile"]
   s.require_paths = ["lib"]
   s.homepage    =
-    'http://rubygems.org/gems/dnsmadeeasy_verify'
+    'https://github.com/simpleweb/dnsmadeeasy-verify'
   s.license       = 'MIT'
   s.add_dependency "faraday",["~> 0.9.1"]
   s.add_dependency "whois",["~> 3.5.8"]
