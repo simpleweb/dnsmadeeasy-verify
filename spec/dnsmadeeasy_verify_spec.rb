@@ -22,6 +22,11 @@ RSpec.describe Dnsmadeeasy_verify do
       let(:resource) { Dnsmadeeasy_verify.list_domains }
 
       it 'contains an expected domain' do
+
+        resource.each do |k, v|
+          v.ns
+        end
+
         expect(resource[ENV["EXPECTED_DOMAIN"]].name).to eq(ENV["EXPECTED_DOMAIN"])
       end
 
