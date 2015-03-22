@@ -23,6 +23,22 @@ module Dnsmadeeasy_verify
     domains
   end
 
+  def self.domains_not_on_dnsmadeeasy()
+    domains = self.list_domains
+
+    domains.each do |k, v|
+      # If none of the name server are set to dnsmadeeasy
+      if not v.ns.any?{ |s| s.downcase().include?("dnsmadeeasy.com") }
+        if v.registered
+          puts k + " does not have name servers set to dnsmadeeasy"
+        else
+          puts k + " is not registered"
+        end
+      end
+    end
+
+  end
+
   class << self
     attr_accessor :configuration
   end
